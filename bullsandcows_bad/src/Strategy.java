@@ -49,17 +49,27 @@ class Strategy {
     }
 
     private int[] matchCodeAndGuess(String guess, String code, int i, int bulls, int cows) {
-        return i == code.length() ? new int[]{bulls, cows} : guess.charAt(i) == code.charAt(i) ? matchCodeAndGuess(guess, code, i + 1, bulls + 1, cows)
+        return i == code.length()
+                ? new int[]{bulls, cows}
+                : matchBullAndCows(guess, code, i, bulls, cows);
+    }
+
+    private int[] matchBullAndCows(String guess, String code, int i, int bulls, int cows) {
+        return guess.charAt(i) == code.charAt(i) ? matchCodeAndGuess(guess, code, i + 1, bulls + 1, cows)
                 : guess.contains(code.charAt(i) + "") ? matchCodeAndGuess(guess, code, i + 1, bulls, cows + 1)
                 : matchCodeAndGuess(guess, code, i + 1, bulls, cows);
     }
 
     public String getCode(String s) {
-        return "memory".equals(s) ? getCodeWithMemory(s) : getCodeWithoutMemory(s);
+        return "memory".equals(s)
+                ? getCodeWithMemory(s)
+                : getCodeWithoutMemory(s);
     }
 
     private String getCodeWithoutMemory(String s) {
-        return "numbers".equals(s) ? getRandomCode(true) : getRandomCode(false);
+        return "numbers".equals(s)
+                ? getRandomCode(true)
+                : getRandomCode(false);
     }
 
     private String getCodeWithMemory(String s) {
