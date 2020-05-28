@@ -17,7 +17,7 @@ class Strategy {
             pr.add(p);
         } else {
             for (int i = 0; i < s.length(); i++) {
-                getPermutations(pr, p + s.charAt(i), s.substring(0, i) + s.substring(i + 1, s.length()), l);
+                getPermutations(pr, p + s.charAt(i), s.substring(0, i) + s.substring(i + 1), l);
             }
         }
     }
