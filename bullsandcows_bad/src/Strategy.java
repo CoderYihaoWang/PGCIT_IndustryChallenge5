@@ -24,7 +24,7 @@ class Strategy {
 
     public String getCode(int[] m) {
         if (guess == null) {
-            guess = getRandomCode();
+            guess = getRandomCode(0, 10);
             return guess;
         }
         Iterator<String> iterator = possibleCodes.iterator();
@@ -42,10 +42,10 @@ class Strategy {
         return guess;
     }
 
-    public String getRandomCode() {
+    public String getRandomCode(int start, int end) {
         String randomCode = "";
         ArrayList<Integer> randomArray = new ArrayList<Integer>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = start; i < end; i++) {
             randomArray.add(i);
         }
 
@@ -72,58 +72,13 @@ class Strategy {
 
     public String getCode(String s) {
         if (s.equals("numbers")) {
-            String randomCode = "";
-            ArrayList<Integer> randomArray = new ArrayList<Integer>();
-            for (int i = 0; i < 10; i++) {
-                randomArray.add(i);
-            }
-
-            Collections.shuffle(randomArray);
-
-            for (int i = 0; i < 4; i++) {
-                randomCode += randomArray.get(i);
-            }
-            return randomCode;
+            return getRandomCode(0, 10);
         } else if (s.equals("letters")) {
-            String randomCode = "";
-            ArrayList<Character> randomArray = new ArrayList<>();
-            for (char i = 65; i < 71; i++) {
-                randomArray.add(i);
-            }
-
-            Collections.shuffle(randomArray);
-
-            for (int i = 0; i < 4; i++) {
-                randomCode += randomArray.get(i) + "";
-            }
-            return randomCode;
+            return getRandomCode(65, 71);
         } else if (s.equals("memory")) {
-            String code = "";
-
-            ArrayList<Integer> randomArray = new ArrayList<Integer>();
-            for (int i = 0; i < 10; i++) {
-                randomArray.add(i);
-            }
-
-            Collections.shuffle(randomArray);
-
-            for (int i = 0; i < 4; i++) {
-                code += randomArray.get(i);
-            }
-
+            String code = getRandomCode(0, 10);
             while (!memory.add(code)) {
-                code = "";
-
-                ArrayList<Integer> randomArray2 = new ArrayList<Integer>();
-                for (int i = 0; i < 10; i++) {
-                    randomArray2.add(i);
-                }
-
-                Collections.shuffle(randomArray2);
-
-                for (int i = 0; i < 4; i++) {
-                    code += randomArray2.get(i);
-                }
+                code = getRandomCode(0, 10);
             }
             return code;
         }
