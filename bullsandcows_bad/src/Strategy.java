@@ -22,24 +22,23 @@ class Strategy {
         }
     }
 
-    public String getCode(int[] m) {
-        if (guess == null) {
-            guess = getRandomCode(true);
-            return guess;
-        }
-        Iterator<String> iterator = possibleCodes.iterator();
-        String tempGuess = "";
-        while (iterator.hasNext()) {
-            String possibleGuess = iterator.next();
-            int[] guessMatch = matchCodeAndGuess(possibleGuess, guess, 0, 0, 0);
-            if (guessMatch[0] != m[0] || guessMatch[1] != m[1]) {
-                iterator.remove();
-            } else {
-                tempGuess = possibleGuess;
-            }
-        }
-        guess = tempGuess;
-        return guess;
+    public String getCode(int[] match) {
+        return guess == null
+                ? getRandomCode(true)
+                : removeInvalidGuessesAndGetRandomCode(match);
+    }
+
+    private void removeInvalidGuesses(int[] match) {
+        possibleCodes.removeIf((code) -> {
+            int[] guessMatch = matchCodeAndGuess(code, guess, 0, 0, 0);
+            return guessMatch[0] != match[0] || guessMatch[1] != match[1];
+        });
+    }
+
+    private String removeInvalidGuessesAndGetRandomCode(int[] match) {
+        if (possibleCodes.size() == 0) return "";
+        removeInvalidGuesses(match);
+        return guess = possibleCodes.iterator().next();
     }
 
     public String getRandomCode(boolean isNumber) {

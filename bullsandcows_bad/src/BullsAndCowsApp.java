@@ -181,7 +181,6 @@ public class BullsAndCowsApp {
                     return false;
                 }
             }
-            return true;
         }
 
         return true;
