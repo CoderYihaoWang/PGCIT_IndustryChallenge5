@@ -70,6 +70,12 @@ class Strategy {
         return new int[] {bulls, cows};
     }
 
+    private int[] matchCodeAndGuess1(String guess, String code, int i, int bulls, int cows) {
+        return i == code.length() ? new int[]{bulls, cows} : guess.charAt(i) == code.charAt(i) ? matchCodeAndGuess1(guess, code, i + 1, bulls + 1, cows)
+                : guess.contains(code.charAt(i) + "") ? matchCodeAndGuess1(guess, code, i + 1, bulls, cows + 1)
+                : matchCodeAndGuess1(guess, code, i + 1, bulls, cows);
+    }
+
     public String getCode(String s) {
         return "memory".equals(s) ? getCodeWithMemory(s) : getCodeWithoutMemory(s);
     }
