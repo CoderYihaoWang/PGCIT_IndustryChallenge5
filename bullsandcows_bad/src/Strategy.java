@@ -12,8 +12,7 @@ class Strategy {
     }
 
     private void getPermutations(Set<String> pr, String p, String s, int l) {
-        int length = p.length();
-        if (length == l) {
+        if (p.length() == l) {
             pr.add(p);
         } else {
             for (int i = 0; i < s.length(); i++) {
