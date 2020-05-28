@@ -71,15 +71,11 @@ class Strategy {
     }
 
     public String getCode(String s) {
-        if ("memory".equals(s))
-            return getCodeWithMemory(s);
-        return getCodeWithoutMemory(s);
+        return "memory".equals(s) ? getCodeWithMemory(s) : getCodeWithoutMemory(s);
     }
 
     private String getCodeWithoutMemory(String s) {
-        if ("numbers".equals(s))
-            getRandomCode(0, 10);
-        return getRandomCode(65, 71);
+        return "numbers".equals(s) ? getRandomCode(0, 10) : getRandomCode(65, 71);
     }
 
     private String getCodeWithMemory(String s) {
