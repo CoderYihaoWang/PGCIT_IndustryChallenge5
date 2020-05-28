@@ -79,9 +79,7 @@ class Strategy {
     }
 
     private String getCodeWithMemory(String s) {
-        String code;
-        do code = getRandomCode(0, 10);
-        while (!memory.add(code));
-        return code;
+        String code = getRandomCode(0, 10);
+        return memory.add(code) ? code : getCodeWithMemory(s);
     }
 }
