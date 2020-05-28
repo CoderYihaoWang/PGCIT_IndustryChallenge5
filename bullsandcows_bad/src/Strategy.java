@@ -71,18 +71,15 @@ class Strategy {
     }
 
     public String getCode(String s) {
-        if (s.equals("numbers")) {
-            return getRandomCode(0, 10);
-        } else if (s.equals("letters")) {
-            return getRandomCode(65, 71);
-        } else if (s.equals("memory")) {
-            String code = getRandomCode(0, 10);
-            while (!memory.add(code)) {
-                code = getRandomCode(0, 10);
-            }
-            return code;
+        switch (s) {
+            case "numbers": return getRandomCode(0, 10);
+            case "letters": return getRandomCode(65, 71);
+            default:
+                String code = getRandomCode(0, 10);
+                while (!memory.add(code)) {
+                    code = getRandomCode(0, 10);
+                }
+                return code;
         }
-
-        return null;
     }
 }
