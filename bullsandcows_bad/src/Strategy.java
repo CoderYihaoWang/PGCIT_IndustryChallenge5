@@ -11,12 +11,12 @@ class Strategy {
         getPermutations(this.possibleCodes, "", "0123456789", 4);
     }
 
-    private void getPermutations(Set<String> pr, String p, String s, int l) {
-        if (p.length() == l) {
-            pr.add(p);
+    private void getPermutations(Set<String> pr, String constructed, String unused, int len) {
+        if (constructed.length() == len) {
+            pr.add(constructed);
         } else {
-            for (int i = 0; i < s.length(); i++) {
-                getPermutations(pr, p + s.charAt(i), s.substring(0, i) + s.substring(i + 1), l);
+            for (int i = 0; i < unused.length(); i++) {
+                getPermutations(pr, constructed + unused.charAt(i), unused.substring(0, i) + unused.substring(i + 1), len);
             }
         }
     }
