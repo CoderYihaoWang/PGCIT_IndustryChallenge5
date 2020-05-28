@@ -2,7 +2,7 @@ import java.util.*;
 
 class Strategy {
     private Set<String> possibleCodes;
-    private String g;
+    private String guess;
     private Set<String> memory;
 
     public Strategy() {
@@ -23,23 +23,23 @@ class Strategy {
     }
 
     public String getCode(int[] m) {
-        if (g == null) {
-            g = getRandomCode();
-            return g;
+        if (guess == null) {
+            guess = getRandomCode();
+            return guess;
         }
         Iterator<String> iterator = possibleCodes.iterator();
         String tempGuess = "";
         while (iterator.hasNext()) {
             String possibleGuess = iterator.next();
-            int[] guessMatch = matchCodeAndGuess(possibleGuess, g);
+            int[] guessMatch = matchCodeAndGuess(possibleGuess, guess);
             if (guessMatch[0] != m[0] || guessMatch[1] != m[1]) {
                 iterator.remove();
             } else {
                 tempGuess = possibleGuess;
             }
         }
-        g = tempGuess;
-        return g;
+        guess = tempGuess;
+        return guess;
     }
 
     public String getRandomCode() {
