@@ -11,13 +11,15 @@ class Strategy {
         getPermutations(this.possibleCodes, "", "0123456789", 4);
     }
 
-    private void getPermutations(Set<String> pr, String constructed, String unused, int len) {
-        if (constructed.length() == len) {
-            pr.add(constructed);
-        } else {
-            for (int i = 0; i < unused.length(); i++) {
-                getPermutations(pr, constructed + unused.charAt(i), unused.substring(0, i) + unused.substring(i + 1), len);
-            }
+    private void getPermutations(Set<String> possibleCodes, String constructed, String unused, int len) {
+        if (constructed.length() == len)
+            possibleCodes.add(constructed);
+        else constructPermutation(possibleCodes, constructed, unused, len);
+    }
+
+    private void constructPermutation(Set<String> possibleCodes, String constructed, String unused, int len) {
+        for (int i = 0; i < unused.length(); i++) {
+            getPermutations(possibleCodes, constructed + unused.charAt(i), unused.substring(0, i) + unused.substring(i + 1), len);
         }
     }
 
